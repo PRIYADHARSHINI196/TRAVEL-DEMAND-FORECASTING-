@@ -1,0 +1,57 @@
+def input_travel_data():
+    travel_data = []
+    while True:
+        try:
+            origin = input("Enter origin location: ")
+            if origin.lower() == 'done':
+                break
+            destination = input("Enter destination location: ")
+            distance = float(input("Enter distance between them (in km): "))
+            travel_data.append((origin, destination, distance))
+        except ValueError:
+            print("Invalid input! Distance should be a numeric value.")
+
+    return travel_data
+
+def view_historical_data(travel_data):
+    print("Historical Travel Data:")
+    for idx, (origin, destination, distance) in enumerate(travel_data, start=1):
+        print(f"{idx}. From {origin} to {destination}: {distance} km")
+
+# Example usage of Module 1:
+if _name_ == "_main_":
+    historical_travel_data = input_travel_data()
+    view_historical_data(historical_travel_data)from statistics import mean
+
+def forecast_demand(travel_data):
+    if not travel_data:
+        print("No historical data available for forecasting.")
+        return
+
+    distances = [distance for _, _, distance in travel_data]
+    average_distance = mean(distances)
+    forecasted_demand = int(average_distance * 1.1)  # Assuming a 10% increase for forecasting
+
+    return forecasted_demand
+
+def analyze_trends(travel_data):
+    if not travel_data:
+        print("No historical data available for analysis.")
+        return
+
+    distances = [distance for _, _, distance in travel_data]
+    max_distance = max(distances)
+    min_distance = min(distances)
+    total_trips = len(distances)
+
+    print("Travel Data Analysis:")
+    print(f"Total number of trips: {total_trips}")
+    print(f"Maximum distance traveled: {max_distance} km")
+    print(f"Minimum distance traveled: {min_distance} km")
+
+# Example usage of Module 2:
+if _name_ == "_main_":
+    # Assuming historical_travel_data is already populated from Module 1 example usage
+    demand_forecast = forecast_demand(historical_travel_data)
+    print(f"Forecasted demand: {demand_forecast} km")
+    analyze_trends(historical_travel_data)
